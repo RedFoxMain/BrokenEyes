@@ -22,7 +22,6 @@ int main(int argc, char* argv[]) {
 	}
 	uint8_t value = 0;
 	std::string code = readFromFile(argv[1]);
-	std::cout << code << std::endl;
 	std::remove_if(code.begin(), code.end(), isspace); // Remove all space
 	vector_of_pairs braces = getBraces(code);
 	std::stack<int> opened_loop_pos;
