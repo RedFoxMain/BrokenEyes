@@ -9,6 +9,7 @@
 * []		-> [loop]					- done
 * (){}		-> (cond) {if_true}			- done
 * !			-> exit from loop			- done
+* ^			-> clear value				- done
 */
 
 // 72 101 108 108 111 44 32 87 111 114 108 100 33 -> Hello, World!
@@ -26,28 +27,29 @@ int main(int argc, char* argv[]) {
 	vector_of_pairs braces = getBraces(code);
 	std::stack<int> opened_loop_pos;
 	for (size_t i = 0; i < code.size(); ++i) {
-		switch (code[i]) {
-			case '!':
-				i = opened_loop_pos.top() + 1;
-				opened_loop_pos.pop();
-				break;
-			case '+': ++value; break;
-			case '-': --value; break;
-			case '.': std::cout << static_cast<char>(value); break;
-			case ',': std::cout << static_cast<char>(value) << " "; break;
-			case ';': std::cout << static_cast<char>(value) << std::endl; break;
-			case '[':
-				if (value == 0) i = findCloseBrace(braces, i);
-				else opened_loop_pos.push(findCloseBrace(braces, i));
-				break;
-			case ']':
-				if (value != 0) i = findOpenBrace(braces, i);
-				break;
-			case '(':
-				if (value != getDigit(code, ++i)) {
-					i = findCloseBrace(braces, ++i);
-				}
-				break;
+		char current_char = code[i];
+		if (current_char == '!') {
+			i = opened_loop_pos.top();
+			opened_loop_pos.pop();
+		}
+		if(current_char == '+') ++value;
+		if(current_char == '-') --value;
+		if(current_char == '.') std::cout << static_cast<char>(value);
+		if(current_char == ',') std::cout << static_cast<char>(value) << " ";
+		if(current_char == ';') std::cout << static_cast<char>(value) << std::endl;
+		if(current_char == '^') value = 0;
+		if (current_char == '[') {
+			if (value == 0) i = findCloseBrace(braces, i);
+			else opened_loop_pos.push(findCloseBrace(braces, i));
+		}
+		if (current_char == ']') {
+			if (value != 0) i = findOpenBrace(braces, i);
+			else  opened_loop_pos.pop();
+		}
+		if (current_char == '(') {
+			if (value != getDigit(code, ++i)) {
+				i = findCloseBrace(braces, ++i);
+			}
 		}
 	}
 	return 0;
