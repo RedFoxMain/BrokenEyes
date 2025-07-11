@@ -9,6 +9,9 @@ vector_of_pairs getBraces(const std::string& text) {
 			if (!st.empty()) {
 				int pos = st.top(); st.pop();
 				temp.push_back({ pos, i });
+			} else {
+				std::cerr << "Unclosed " << text[i] << std::endl;
+				exit(1);
 			}
 		}
 	}
@@ -26,7 +29,7 @@ int findCloseBrace(const vector_of_pairs& vec, size_t index) {
 	auto iter = std::find_if(vec.begin(), vec.end(), [index](const auto& pair) {
 		return pair.first == index;
 	});
-	return (iter != vec.end()) ? iter->second : -1;
+	return (iter != vec.end()) ? iter->second : - 1;
 }
 
 std::string readFromFile(const char* file_name) {
@@ -40,8 +43,8 @@ std::string readFromFile(const char* file_name) {
 	return code;
 }
 
-uint8_t getDigit(const std::string& code, size_t& pos) {
+int getDigit(const std::string& code, size_t& pos) {
 	std::string temp;
 	while (std::isdigit(code[pos]) && code[pos] != ')') temp += code[pos++];
-	return static_cast<uint8_t>(std::stoi(temp));
+	return (!temp.empty()) ? std::stoi(temp) : -1;
 }
