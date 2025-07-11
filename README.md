@@ -1,6 +1,6 @@
 # BrokenEyes
 ## Info
-<b>BrokenEyes has one mem cell and has size of byte(0 to 255)</b>
+<b>BrokenEyes has one memory cell and has a size of a byte (0 to 255).</b>
 ## Basic Syntax
 ```
 . -> print mem cell as char<br>
