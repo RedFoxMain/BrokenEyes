@@ -16,7 +16,7 @@
 ## Hello, World!
 In my implementation.
 ```
-hello.be
+examples/hello.be
 +[(72){.}(101){.}(108){..}(111){.}+]+[(44){,!}+]+[(32){.}(87){.}(111){.}(114){.}+]+[(108){.}+]+[(100){.}+]+[(33){.!}+]
 ```
 I hope you will <s>suffer</s> enjoy it! ;)
