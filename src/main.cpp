@@ -24,11 +24,11 @@ int main(int argc, char* argv[]) {
 	uint8_t value = 0;
 	bool in_loop = false;
 	std::string code = readFromFile(argv[1]);
-	std::remove_if(code.begin(), code.end(), isspace); // Remove all space
 	vector_of_pairs braces = getBraces(code);
 	std::stack<int> opened_loop_pos;
 	for (size_t i = 0; i < code.size(); ++i) {
 		char current_char = code[i];
+		if(std::isspace(current_char)) continue;
 		if (current_char == '!' && in_loop) {
 			i = opened_loop_pos.top();
 			in_loop = false;

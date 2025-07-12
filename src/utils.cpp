@@ -9,9 +9,6 @@ vector_of_pairs getBraces(const std::string& text) {
 			if (!st.empty()) {
 				int pos = st.top(); st.pop();
 				temp.push_back({ pos, i });
-			} else {
-				std::cerr << "Unclosed " << text[i] << std::endl;
-				exit(1);
 			}
 		}
 	}
